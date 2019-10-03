@@ -47,7 +47,7 @@ safeCompose(
 Import the function.
 
 ```js
-import safeFunction from 'safe-function'
+import safeCompose from 'safe-compose'
 ```
 
 If the first argument is a non function value it will be used as the return value if the composition fails.
