@@ -53,7 +53,7 @@ import safeFunction from 'safe-function'
 If the first argument is a non function value it will be used as the return value if the composition fails.
 
 ```js
-safeCompose(1337, add(1), multiply(3), divide(3), subtract(7))(NaN)
+safeCompose(0, add(2), multiply(2), divide(2), subtract(2))({})
 ```
 
 With JSON.parse.
