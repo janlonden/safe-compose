@@ -1,4 +1,4 @@
-# safe-compose
+# safeCompose
 Create function compositions without worry
 
 [![npm (tag)](https://img.shields.io/npm/v/safe-compose/latest?style=for-the-badge)](https://www.npmjs.com/package/safe-compose)
@@ -42,7 +42,13 @@ safeCompose(
 
 `npm install safe-compose`
 
-## Usage examples
+## Usage
+
+Import the function.
+
+```js
+import safeFunction from 'safe-function'
+```
 
 If the first argument is a non function value it will be used as the return value if the composition fails.
 
