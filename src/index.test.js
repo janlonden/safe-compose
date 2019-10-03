@@ -1,9 +1,9 @@
 var safeCompose = require('./index')
 
-var head = xs => xs[0]
-var last = xs => xs[xs.length - 1]
-var toUpper = x => x.toUpperCase()
-var trim = x => x.trim()
+var head = function (xs) { return xs[0] }
+var last = function (xs) { return xs[xs.length - 1] }
+var toUpper = function (x) { return x.toUpperCase() }
+var trim = function (x) { return x.trim() }
 
 test('does not crash on undefined', () => {
   expect(safeCompose(trim, toUpper, head)(undefined)).toBe(undefined)
