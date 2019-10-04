@@ -21,14 +21,6 @@ test('does not crash on last fn when error has occurred', () => {
   expect(safeCompose(head, last)(undefined)).toBe(undefined)
 })
 
-test('returns the output of last fn when error has occurred', () => {
-  expect(
-    safeCompose(function () {
-      return 'lol'
-    }, last)(undefined)
-  ).toBe('lol')
-})
-
 test('does not crash when last fn throws', () => {
   expect(
     safeCompose(function () {
