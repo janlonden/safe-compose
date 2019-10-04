@@ -28,7 +28,13 @@ var safeCompose = function () {
       if (index === 0) {
         if (hasError) {
           if (typeof fn === 'function') {
-            return
+            try {
+              return fn(undefined)
+            } catch (error) {
+              logError(error)
+
+              return
+            }
           }
 
           return fn
