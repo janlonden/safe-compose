@@ -50,13 +50,13 @@ Import the function.
 import safeCompose from 'safe-compose'
 ```
 
-If the first argument is a non function value it will be used as the return value if the composition fails.
+If the first argument is a non-function value it will be used as the return value if the composition fails.
 
 ```js
-safeCompose(0, add(2), multiply(2), divide(2), subtract(2))({})
+safeCompose('FALLBACK', trim, toUpper, head)(undefined)
 ```
 
-With `JSON.parse`.
+An example with `JSON.parse`.
 
 ```js
 safeCompose(
