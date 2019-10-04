@@ -3,9 +3,8 @@ Create function compositions without worry
 
 [![npm (tag)](https://img.shields.io/npm/v/safe-compose/latest?style=for-the-badge)](https://www.npmjs.com/package/safe-compose)
 
-## Motivation behind safe-compose
-
-Very often our composed functions end up looking something like this:
+## Motivation behind safeCompose
+Quite often our composed functions end up looking something like this:
 
 ```js
 // import {...} from ramda/ramda-adjunct
@@ -25,7 +24,7 @@ compose(
 )(data)
 ```
 
-Having to code defensively like this is an unnecessary cognitive load. With `safe-compose` we can create our happy path in peace knowing that our program won't crash if any function throws an error. With `safe-compose` the composition above can be written like this:
+Having to code defensively like this adds an unnecessary cognitive load. With `safeCompose` we only need to think about our happy path:
 
 ```js
 safeCompose(
@@ -48,6 +47,14 @@ Import the function.
 
 ```js
 import safeCompose from 'safe-compose'
+```
+
+If the composition fails the return value will be the output of the last function, which will be called with `undefined` as its argument since some functions return themselves when given no arguments.
+
+In the example below `head` will throw so we jump to the last function which given anything except a non-empty string will return `'FALLBACK'`.
+
+```js
+safeCompose(unless(isNonEmptyString, always('FALLBACK')), trim, toUpper, head)(undefined)
 ```
 
 If the first argument is a non-function value it will be used as the return value if the composition fails.
