@@ -25,7 +25,7 @@ compose(
 )(data)
 ```
 
-Having to code defensively like this is a huge cognitive load. With `safe-compose` we can create our happy path in peace knowing that our program won't crash if any function throws an error. With `safe-compose` the composition above can be written like this:
+Having to code defensively like this is an unnecessary cognitive load. With `safe-compose` we can create our happy path in peace knowing that our program won't crash if any function throws an error. With `safe-compose` the composition above can be written like this:
 
 ```js
 safeCompose(
@@ -56,7 +56,7 @@ If the first argument is a non function value it will be used as the return valu
 safeCompose(0, add(2), multiply(2), divide(2), subtract(2))({})
 ```
 
-With JSON.parse.
+With `JSON.parse`.
 
 ```js
 safeCompose(
