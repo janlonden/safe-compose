@@ -1,6 +1,6 @@
 {
   "name": "safe-compose",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Create function compositions without worry",
   "main": "src/index.js",
   "scripts": {
