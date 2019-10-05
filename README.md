@@ -15,13 +15,17 @@ const data = [
 ]
 
 compose(
-  ifElse(both(isNonEmptyArray, all(isNonEmptyString)), identity, always(['fallback'])),
+  ifElse(
+    both(isNonEmptyArray, all(isNonEmptyString)),
+    identity,
+    always(['fallback'])
+  ),
   take(3),
   propOr([], 'y'),
   ifElse(both(isNonEmptyArray, all(isObject)), find(prop('x')), always({})),
   ifElse(isNonEmptyArray, head, F),
   ifElse(isNonEmptyArray, last, F)
-)(data)
+)(data) // => ['lorem', 'ipsum', 'dolor']
 ```
 
 Having to code defensively like this adds an unnecessary cognitive load. With `safeCompose` we only need to think about our happy path:
@@ -34,7 +38,7 @@ safeCompose(
   find(prop('x')),
   head,
   last
-)(data)
+)(data) // => ['lorem', 'ipsum', 'dolor']
 ```
 
 ## Installation
@@ -54,13 +58,23 @@ If the composition fails the return value will be the output of the last functio
 In the example below `head` will throw so we jump to the last function which given anything except a non-empty string will return `'FALLBACK'`.
 
 ```js
-safeCompose(unless(isNonEmptyString, always('FALLBACK')), trim, toUpper, head)(undefined)
+safeCompose(
+  unless(isNonEmptyString, always('FALLBACK')),
+  trim,
+  toUpper,
+  head
+)(undefined) // => 'FALLBACK'
 ```
 
 If the first argument is a non-function value it will be used as the return value if the composition fails.
 
 ```js
-safeCompose('FALLBACK', trim, toUpper, head)(undefined)
+safeCompose(
+  'FALLBACK',
+  trim,
+  toUpper,
+  head
+)(undefined) // => 'FALLBACK'
 ```
 
 An example with `JSON.parse`.
