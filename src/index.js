@@ -26,23 +26,9 @@ var safeCompose = function () {
       var fn = fns[index]
 
       if (index === 0) {
-        if (hasError) {
-          if (typeof fn === 'function') {
-            try {
-              return fn(undefined)
-            } catch (error) {
-              logError(error)
-
-              return
-            }
-          }
-
-          return fn
-        }
-
         if (typeof fn === 'function') {
           try {
-            return fn(output)
+            return fn(hasError ? undefined : output)
           } catch (error) {
             logError(error)
 
@@ -50,11 +36,9 @@ var safeCompose = function () {
           }
         }
 
-        if (fns.length === 1) {
-          return fn
-        }
+        if (fns.length === 1) return fn
 
-        return output
+        return hasError ? fn : output
       }
 
       try {
