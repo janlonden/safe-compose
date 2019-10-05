@@ -22,7 +22,7 @@ var safeCompose = function () {
     var output = data
     var index = fns.length - 1
 
-    while (index > -1) {
+    while (index >= 0) {
       var fn = fns[index]
 
       if (index === 0) {
@@ -36,9 +36,7 @@ var safeCompose = function () {
           }
         }
 
-        if (fns.length === 1) return fn
-
-        return hasError ? fn : output
+        return hasError || fns.length === 1 ? fn : output
       }
 
       try {
