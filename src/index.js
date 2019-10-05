@@ -53,18 +53,15 @@ var safeCompose = function () {
         }
       }
 
-      if (hasError) {
-        index -= 1
-
-        continue
-      }
-
       try {
         output = fn(output)
       } catch (error) {
         logError(error)
 
         hasError = true
+        index = 0
+
+        continue
       }
 
       index -= 1

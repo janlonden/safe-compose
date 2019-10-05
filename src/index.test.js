@@ -5,6 +5,10 @@ var last = function (xs) { return xs[xs.length - 1] }
 var toUpper = function (x) { return x.toUpperCase() }
 var trim = function (x) { return x.trim() }
 
+test('a successful composition works as expected', function () {
+  expect(safeCompose(trim, toUpper, head)(['  arst'])).toBe('ARST')
+})
+
 test('does not crash on undefined', function () {
   expect(safeCompose(trim, toUpper, head)(undefined)).toBe(undefined)
 })
@@ -13,7 +17,7 @@ test('does not crash on null', function () {
   expect(safeCompose(trim, toUpper, head)(null)).toBe(undefined)
 })
 
-test('takes non function value on error', function () {
+test('takes non-function value on error', function () {
   expect(safeCompose(['default'], last)(undefined)).toEqual(['default'])
 })
 
