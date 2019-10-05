@@ -15,11 +15,7 @@ const data = [
 ]
 
 compose(
-  ifElse(
-    both(isNonEmptyArray, all(isNonEmptyString)),
-    identity,
-    always(['fallback'])
-  ),
+  unless(both(isNonEmptyArray, all(isNonEmptyString)), always(['fallback'])),
   take(3),
   propOr([], 'y'),
   ifElse(both(isNonEmptyArray, all(isObject)), find(prop('x')), always({})),
