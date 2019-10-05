@@ -81,5 +81,5 @@ safeCompose(
   assoc('lorem', 'lorem'),
   dissoc('ipsum'),
   JSON.parse
-)('{"ipsum": "ips')
+)('{"ipsum": "ips') // => { fallback: 'fallback' }
 ```
