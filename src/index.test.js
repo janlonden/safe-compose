@@ -17,6 +17,14 @@ test('does not crash on null', function () {
   expect(safeCompose(trim, toUpper, head)(null)).toBe(undefined)
 })
 
+test('returns non-function value if there is only one argument', function () {
+  expect(safeCompose('FALLBACK')(['  arst'])).toBe('FALLBACK')
+})
+
+test('returns non-function value if there is only one argument and no data', function () {
+  expect(safeCompose('FALLBACK')()).toBe('FALLBACK')
+})
+
 test('takes non-function value on error', function () {
   expect(safeCompose(['default'], last)(undefined)).toEqual(['default'])
 })

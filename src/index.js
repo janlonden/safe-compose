@@ -45,6 +45,10 @@ var safeCompose = function () {
             return fn(output)
           }
 
+          if (fns.length === 1) {
+            return fn
+          }
+
           return output
         } catch (error) {
           logError(error)
