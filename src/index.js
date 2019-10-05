@@ -40,21 +40,21 @@ var safeCompose = function () {
           return fn
         }
 
-        try {
-          if (typeof fn === 'function') {
+        if (typeof fn === 'function') {
+          try {
             return fn(output)
+          } catch (error) {
+            logError(error)
+
+            return
           }
-
-          if (fns.length === 1) {
-            return fn
-          }
-
-          return output
-        } catch (error) {
-          logError(error)
-
-          return
         }
+
+        if (fns.length === 1) {
+          return fn
+        }
+
+        return output
       }
 
       try {
