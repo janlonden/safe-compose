@@ -86,4 +86,4 @@ safeCompose(
 
 ## Performance
 
-`safeCompose` is much faster than the Ramda alternative since we don't need to check our input on each step in the pipe, and if any of the functions throw we immediately skip to the last function. If you'd like to see some numbers you can check out the [Stackblitz page](https://stackblitz.com/edit/safe-compose). To see the results you have to open your browsers console.
+`safeCompose` is very fast since we don't need to check input values in the pipe. If you'd like to see some numbers you can check out the [Stackblitz page](https://stackblitz.com/edit/safe-compose). To see the results you have to open your browsers console.
