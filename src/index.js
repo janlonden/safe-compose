@@ -45,15 +45,10 @@ var safeCompose = function () {
         logError(error)
 
         hasError = true
-        index = 0
-
-        continue
       }
 
-      index -= 1
+      index = hasError ? 0 : index - 1
     }
-
-    return output
   }
 }
 
