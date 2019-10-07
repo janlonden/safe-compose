@@ -18,7 +18,7 @@ var safeCompose = function () {
       return
     }
 
-    var hasError = false
+    var hasFailed = false
     var output = data
     var index = fns.length - 1
 
@@ -28,7 +28,7 @@ var safeCompose = function () {
       if (index === 0) {
         if (typeof fn === 'function') {
           try {
-            return fn(hasError ? undefined : output)
+            return fn(hasFailed ? undefined : output)
           } catch (error) {
             logError(error)
 
@@ -36,7 +36,7 @@ var safeCompose = function () {
           }
         }
 
-        return hasError || fns.length === 1 ? fn : output
+        return hasFailed || fns.length === 1 ? fn : output
       }
 
       try {
@@ -44,10 +44,10 @@ var safeCompose = function () {
       } catch (error) {
         logError(error)
 
-        hasError = true
+        hasFailed = true
       }
 
-      index = hasError ? 0 : index - 1
+      index = hasFailed ? 0 : index - 1
     }
   }
 }

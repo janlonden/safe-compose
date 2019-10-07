@@ -17,7 +17,7 @@ var trim = function (x) {
 }
 
 test('a successful composition works as expected', function () {
-  expect(safeCompose(trim, toUpper, head)(['  arst'])).toBe('ARST')
+  expect(safeCompose(trim, toUpper, head)(['  lorem'])).toBe('LOREM')
 })
 
 test('does not crash on undefined', function () {
@@ -29,7 +29,7 @@ test('does not crash on null', function () {
 })
 
 test('returns non-function value if there is only one argument', function () {
-  expect(safeCompose('FALLBACK')(['  arst'])).toBe('FALLBACK')
+  expect(safeCompose('FALLBACK')('lorem')).toBe('FALLBACK')
 })
 
 test('returns non-function value if there is only one argument and no data', function () {
@@ -37,26 +37,34 @@ test('returns non-function value if there is only one argument and no data', fun
 })
 
 test('takes non-function value on error', function () {
-  expect(safeCompose(['fallback'], last)(undefined)).toEqual(['fallback'])
-})
-
-test('does not crash on last fn when error has occurred', function () {
-  expect(safeCompose(head, last)(undefined)).toBe(undefined)
+  expect(safeCompose('fallback', trim, toUpper, head)(undefined)).toBe(
+    'fallback'
+  )
 })
 
 test('returns the output of last fn when error has occurred', function () {
   expect(
-    safeCompose(function () {
-      return 'fallback'
-    }, last)(undefined)
+    safeCompose(
+      function () {
+        return 'fallback'
+      },
+      trim,
+      toUpper,
+      head
+    )(undefined)
   ).toBe('fallback')
 })
 
 test('does not crash when last fn throws', function () {
   expect(
-    safeCompose(function () {
-      throw new Error()
-    }, last)(undefined)
+    safeCompose(
+      function () {
+        throw new Error()
+      },
+      trim,
+      toUpper,
+      head
+    )(undefined)
   ).toBe(undefined)
 })
 

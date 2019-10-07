@@ -1,9 +1,15 @@
 # safeCompose
-Create function compositions without worry
+
+Create robust function compositions worrilessly
 
 [![npm (tag)](https://img.shields.io/npm/v/safe-compose/latest?style=for-the-badge)](https://www.npmjs.com/package/safe-compose)
 
+## What safeCompose does
+
+What `safeCompose` does is that it uses try/catch for all function calls in the composition. It also gives you the option to provide a fallback value in case any function throws.
+
 ## Motivation behind safeCompose
+
 Quite often our composed functions end up looking something like this:
 
 ```js
@@ -24,7 +30,7 @@ compose(
 )(data) // => ['lorem', 'ipsum', 'dolor']
 ```
 
-Having to code defensively like this adds an unnecessary cognitive load. With `safeCompose` we only need to think about our happy path:
+Having to code defensively like this is an unnecessary cognitive load. With `safeCompose` we only need to think about our happy path:
 
 ```js
 safeCompose(
@@ -49,9 +55,7 @@ Import the function.
 import safeCompose from 'safe-compose'
 ```
 
-If the composition fails the return value will be the output of the last function, which will be called with `undefined` as its argument since some functions return themselves when given no arguments.
-
-In the example below `head` will throw so we jump to the last function which given anything except a non-empty string will return `'FALLBACK'`.
+In the example below `head` will throw, which will cause `safeCompose` to skip to the last function and call it with `undefined`(some functions return themselves given no arguments). In this case the last function returns `'FALLBACK'` given anything except a non-empty string.
 
 ```js
 safeCompose(
@@ -62,7 +66,7 @@ safeCompose(
 )(undefined) // => 'FALLBACK'
 ```
 
-If the first argument is a non-function value it will be used as the return value if the composition fails.
+If the first argument is a non-function value it will be used as the fallback value.
 
 ```js
 safeCompose(
