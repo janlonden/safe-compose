@@ -29,11 +29,11 @@ test('does not crash on null', function () {
 })
 
 test('returns non-function value if there is only one argument', function () {
-  expect(safeCompose('FALLBACK')('lorem')).toBe('FALLBACK')
+  expect(safeCompose('fallback')('lorem')).toBe('fallback')
 })
 
 test('returns non-function value if there is only one argument and no data', function () {
-  expect(safeCompose('FALLBACK')()).toBe('FALLBACK')
+  expect(safeCompose('fallback')()).toBe('fallback')
 })
 
 test('takes non-function value on error', function () {
