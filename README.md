@@ -77,6 +77,12 @@ safeCompose(
 )(undefined) // => 'FALLBACK'
 ```
 
+With no fallback.
+
+```js
+safeCompose(trim, toUpper, head)(null) // => undefined
+```
+
 An example with `JSON.parse`.
 
 ```js
