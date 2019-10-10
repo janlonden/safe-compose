@@ -9,26 +9,25 @@ var logError = function (error) {
 }
 
 var safeCompose = function () {
-  var fns = arguments
+  var args = arguments
 
   return function (data) {
-    if (!fns.length) {
+    if (!args.length) {
       logError('At least one function is required')
 
       return
     }
 
-    var hasFailed = false
     var output = data
-    var index = fns.length - 1
+    var index = args.length - 1
 
     while (index >= 0) {
-      var fn = fns[index]
+      var arg = args[index]
 
       if (index === 0) {
-        if (typeof fn === 'function') {
+        if (typeof arg === 'function') {
           try {
-            return fn(hasFailed ? undefined : output)
+            return arg(output)
           } catch (error) {
             logError(error)
 
@@ -36,18 +35,18 @@ var safeCompose = function () {
           }
         }
 
-        return hasFailed || fns.length === 1 ? fn : output
+        return output === undefined || args.length === 1 ? arg : output
       }
 
       try {
-        output = fn(output)
+        output = arg(output)
       } catch (error) {
-        logError(error)
+        output = undefined
 
-        hasFailed = true
+        logError(error)
       }
 
-      index = hasFailed ? 0 : index - 1
+      index -= 1
     }
   }
 }

@@ -4,10 +4,6 @@ var head = function (xs) {
   return xs[0]
 }
 
-var last = function (xs) {
-  return xs[xs.length - 1]
-}
-
 var toUpper = function (x) {
   return x.toUpperCase()
 }
@@ -70,4 +66,17 @@ test('does not crash when last fn throws', function () {
 
 test('returns undefined when no arguments are passed', function () {
   expect(safeCompose()()).toBe(undefined)
+})
+
+test('can recover from error', function () {
+  expect(
+    safeCompose(
+      trim,
+      toUpper,
+      function (x) {
+        return x || '  fallback'
+      },
+      head
+    )(undefined)
+  ).toBe('FALLBACK')
 })
