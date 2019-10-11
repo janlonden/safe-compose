@@ -1,12 +1,4 @@
-var isDevelopment = process.env.NODE_ENV === 'development'
-
-var logError = function (error) {
-  if (isDevelopment) {
-    console.group('safeCompose')
-    console.error(error)
-    console.groupEnd('safeCompose')
-  }
-}
+var logError = require('./log-error')
 
 var safeCompose = function () {
   var args = arguments
