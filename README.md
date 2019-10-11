@@ -28,7 +28,7 @@ In the example below we run our composition with `undefined`. The first function
 
 ```js
 const head = xs => xs[0]
-const toUpper x => x.toUpperCase()
+const toUpper = x => x.toUpperCase()
 const trim = x => x.trim()
 
 safeCompose(
@@ -42,7 +42,7 @@ To provide a fallback you can use a function that returns the fallback value if 
 
 ```js
 safeCompose(
-  x => typeof x === 'string' ? x : 'FALLBACK'
+  x => typeof x === 'string' ? x : 'FALLBACK',
   trim, // output = undefined
   toUpper, // output = undefined
   head // output = undefined
@@ -53,7 +53,7 @@ You can also use a non-function value as a fallback. Note that only the first ar
 
 ```js
 safeCompose(
-  'FALLBACK'
+  'FALLBACK',
   trim, // output = undefined
   toUpper, // output = undefined
   head // output = undefined
