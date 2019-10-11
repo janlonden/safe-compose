@@ -24,7 +24,7 @@ import safeCompose from 'safe-compose'
 
 I think the best way to explain how `safeCompose` works is by going through a few examples.
 
-In the example below we run our composition with `undefined`. The first function to receive our data is `head`, which expects an array. Calling it with `undefined` will lead to an exception, but do not fret – `safeCompose` uses `try...catch` for all functions in the composition. `safeCompose` has an `output` variable which will be assigned either the output value of the current function or `undefined` in case the function fails. In this case all our functions will fail, so the output value of the composition will be `undefined`.
+In the example below we run our composition with `undefined`. The first function to receive our data is `head`, which expects an array. Calling `head` with `undefined` will lead to an exception, but do not fret – `safeCompose` uses `try...catch` for all functions in the composition. `safeCompose` has an `output` variable which will be assigned either the output value of the current function or `undefined` in case the function fails. In this case all our functions will fail, so the output value of the composition will be `undefined`.
 
 ```js
 const head = xs => xs[0]
