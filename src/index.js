@@ -10,20 +10,28 @@ var safeCompose = function () {
       return
     }
 
-    return (function recur (output, index) {
+    var output = data
+    var index = args.length - 1
+
+    while (index >= 0) {
       var arg = args[index]
 
       try {
-        if (index > 0) return recur(arg(output), index - 1)
-        if (typeof arg === 'function') return arg(output)
+        if (index === 0) {
+          if (typeof arg === 'function') return arg(output)
 
-        return output === undefined || args.length === 1 ? arg : output
+          return output === undefined || args.length === 1 ? arg : output
+        }
+
+        output = arg(output)
       } catch (error) {
-        logError(error)
+        output = undefined
 
-        return recur(undefined, index - 1)
+        logError(error)
       }
-    })(data, args.length - 1)
+
+      index -= 1
+    }
   }
 }
 
