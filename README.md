@@ -6,7 +6,7 @@ Create robust function compositions worrilessly
 
 ## Why safeCompose
 
-To cover all the possible paths and shapes data can take in a composition can be very energy and time consuming. With `safeCompose` we only have to think about our happy path.
+To cover all possible paths and shapes data can take in a composition can be very energy and time consuming. With `safeCompose` we only have to think about our happy path.
 
 ## Installation
 
